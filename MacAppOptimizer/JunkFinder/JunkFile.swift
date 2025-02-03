@@ -134,10 +134,10 @@ struct JunkFileCleanupView: View {
 //            fileManager.urls(for: .libraryDirectory, in: .userDomainMask).first?.appendingPathComponent("Saved Application State"),
 //            fileManager.urls(for: .libraryDirectory, in: .userDomainMask).first?.appendingPathComponent("Containers"),
             fileManager.urls(for: .libraryDirectory, in: .userDomainMask).first?.appendingPathComponent("Developer/Xcode/DerivedData"),
-//            fileManager.urls(for: .developerDirectory, in: .userDomainMask).first?.appendingPathComponent("Xcode/Archives"),
-//            fileManager.urls(for: .developerDirectory, in: .userDomainMask).first?.appendingPathComponent("Xcode/iOS DeviceSupport"),
-//            fileManager.urls(for: .developerDirectory, in: .userDomainMask).first?.appendingPathComponent("Xcode/watchOS DeviceSupport"),
-//            fileManager.urls(for: .developerDirectory, in: .userDomainMask).first?.appendingPathComponent("Xcode/tvOS DeviceSupport")
+//            fileManager.urls(for: .developerDirectory, in: .userDomainMask).first?.appendingPathComponent("Developer/Xcode/Archives"),
+//            fileManager.urls(for: .developerDirectory, in: .userDomainMask).first?.appendingPathComponent("Developer/Xcode/iOS DeviceSupport"),
+//            fileManager.urls(for: .developerDirectory, in: .userDomainMask).first?.appendingPathComponent("Developer/Xcode/watchOS DeviceSupport"),
+//            fileManager.urls(for: .developerDirectory, in: .userDomainMask).first?.appendingPathComponent("Developer/Xcode/tvOS DeviceSupport")
         ].compactMap { $0 }
 
         // Process directories asynchronously

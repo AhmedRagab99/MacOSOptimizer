@@ -48,10 +48,13 @@ struct MainView: View {
 //                .tabItem {
 //                    Label("Uninstaller", systemImage: "xmark.bin")
 //                }
+            InstalledAppsView()
+                .tabItem {
+                    Label("installed", systemImage: "xmark.bin")
+                }
         }
     }
 }
-
 
 
 //

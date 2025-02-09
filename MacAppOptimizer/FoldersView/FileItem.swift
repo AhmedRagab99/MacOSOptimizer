@@ -11,7 +11,7 @@ import Foundation
 import SwiftUI
 
 /// Represents a file or folder with metadata
-struct FileItem: Identifiable,Hashable {
+struct FileItems: Identifiable,Hashable {
     let id = UUID()
     let name: String           // File name
     let path: String           // Full path
@@ -21,10 +21,10 @@ struct FileItem: Identifiable,Hashable {
 
 /// Fetches all files & folders in a given directory.
 /// - Parameter directoryPath: The path to list files from.
-/// - Returns: An array of `FileItem` representing files & folders.
-func getFilesInDirectory(directoryPath: String) -> [FileItem] {
+/// - Returns: An array of `FileItems` representing files & folders.
+func getFilesInDirectory(directoryPath: String) -> [FileItems] {
     let fileManager = FileManager.default
-    var fileList: [FileItem] = []
+    var fileList: [FileItems] = []
 
     do {
         let items = try fileManager.contentsOfDirectory(atPath: directoryPath)
@@ -35,7 +35,7 @@ func getFilesInDirectory(directoryPath: String) -> [FileItem] {
             
             if fileManager.fileExists(atPath: fullPath, isDirectory: &isDirectory) {
                 let size = isDirectory.boolValue ? getFolderSize(path: fullPath) : getFileSize(path: fullPath)
-                let file = FileItem(name: item, path: fullPath, size: size, isDirectory: isDirectory.boolValue)
+                let file = FileItems(name: item, path: fullPath, size: size, isDirectory: isDirectory.boolValue)
                 fileList.append(file)
             }
         }
@@ -90,8 +90,8 @@ func getFolderSize(path: String) -> String {
 /// Main view displaying a list of files and folders.
 struct FileListView: View {
     let directoryPath: String
-    @State private var files: [FileItem] = []
-    @State private var selectedFile: FileItem?  // Selected file or folder
+    @State private var files: [FileItems] = []
+    @State private var selectedFile: FileItems?  // Selected file or folder
 
     var body: some View {
         NavigationSplitView {
@@ -125,7 +125,7 @@ struct FileListView: View {
     }
 
     /// Determines whether to open a folder view or a file detail view.
-    private func destinationView(for file: FileItem) -> some View {
+    private func destinationView(for file: FileItems) -> some View {
         if file.isDirectory {
             return AnyView(FileDetailListView(directoryPath: file.path, folderName: file.name))
         } else {
@@ -139,7 +139,7 @@ struct FileListView: View {
 struct FileDetailListView: View {
     let directoryPath: String
     let folderName: String
-    @State private var files: [FileItem] = []
+    @State private var files: [FileItems] = []
 
     var body: some View {
         List(files) { file in
@@ -165,7 +165,7 @@ struct FileDetailListView: View {
     }
 
     /// Opens either another folder view or a file detail view.
-    private func destinationView(for file: FileItem) -> some View {
+    private func destinationView(for file: FileItems) -> some View {
         if file.isDirectory {
             return AnyView(FileDetailListView(directoryPath: file.path, folderName: file.name))
         } else {
@@ -176,7 +176,7 @@ struct FileDetailListView: View {
 
 /// Detailed view showing full file path and size.
 struct FileDetailView: View {
-    let file: FileItem
+    let file: FileItems
 
     var body: some View {
         VStack(spacing: 20) {
